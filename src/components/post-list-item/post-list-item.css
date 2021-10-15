@@ -21,8 +21,9 @@
     color: red;
 }
 .app-list-item .fa-heart {
-    width: 35px;
-    height: 35px;
+    width: 17px;
+    height: 17px;
+    margin-left: 7px;
     text-align: center;
     line-height: 35px;
     font-size: 16px;
