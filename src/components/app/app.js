@@ -74,38 +74,6 @@ export default class App extends Component {
         })
       }
 
-    // onToggleImportant(id) {
-    //     this.setState(({data}) => {
-    //         const index = data.findIndex(elem => elem.id === id);
-    //         const old = data[index];
-    //         const newItem = {...old, important: !old.important}
-
-    //         const before = data.slice(0, index);
-    //         const after = data.slice(index + 1);
-    //         const newArr = [...before, newItem, ...after];
-
-    //         return{
-    //             data: newArr
-    //         }
-    //     })
-    // }
-
-    // onToggleLiked(id) {
-    //     this.setState(({data}) => {
-    //         const index = data.findIndex(elem => elem.id === id);
-    //         const old = data[index];
-    //         const newItem = {...old, like: !old.like}
-
-    //         const before = data.slice(0, index);
-    //         const after = data.slice(index + 1);
-    //         const newArr = [...before, newItem, ...after];
-
-    //         return{
-    //             data: newArr
-    //         }
-    //     })
-    // }
-
     searchPost(items, term) {
         if (term.length === 0) {
             return items
@@ -163,4 +131,3 @@ export default class App extends Component {
         )
     }    
 }
-
