@@ -28,13 +28,7 @@ export default class App extends Component {
 
     deletItem(id) {
         this.setState(({data}) => {
-            const index = data.findIndex(elem => elem.id === id);
-            const before = data.slice(0, index);
-            const after = data.slice(index + 1);
-            const newArr = [...before, ...after];
-            return {
-                data: newArr
-            }
+            return {data: data.filter((elem) => elem.id !== id)};
         })
     }
 
@@ -45,44 +39,72 @@ export default class App extends Component {
             id: this.maxId++
         }
         this.setState(({data}) => {
-            const newArr = [...data, newItem];
-            return{
-                data: newArr
-            }
+            if (newItem.label != 0) {
+                const newArr = [...data, newItem];
+                return{
+                 data: newArr
+                }
+            } 
         })
     }
 
-    onToggleImportant(id) {
+    onToggleProperty(arr, id, propName) {
+        const ind = arr.findIndex((elem) => elem.id === id);
+        const oldItem = arr[ind];
+        const newItem = {...oldItem, [propName]: !oldItem[propName]};
+        const before = arr.slice(0, ind);
+        const after = arr.slice(ind + 1);
+        const newArray = [...before, newItem, ...after];
+        return newArray;
+      }
+    
+      onToggleImportant = (id) => {
         this.setState(({data}) => {
-            const index = data.findIndex(elem => elem.id === id);
-            const old = data[index];
-            const newItem = {...old, important: !old.important}
-
-            const before = data.slice(0, index);
-            const after = data.slice(index + 1);
-            const newArr = [...before, newItem, ...after];
-
-            return{
-                data: newArr
-            }
+          return {
+            data: this.onToggleProperty(data, id, 'important')
+          }
         })
-    }
-
-    onToggleLiked(id) {
+      }
+    
+      onToggleLiked = (id) => {
         this.setState(({data}) => {
-            const index = data.findIndex(elem => elem.id === id);
-            const old = data[index];
-            const newItem = {...old, like: !old.like}
-
-            const before = data.slice(0, index);
-            const after = data.slice(index + 1);
-            const newArr = [...before, newItem, ...after];
-
-            return{
-                data: newArr
-            }
+          return {
+            data: this.onToggleProperty(data, id, 'like')
+          }
         })
-    }
+      }
+
+    // onToggleImportant(id) {
+    //     this.setState(({data}) => {
+    //         const index = data.findIndex(elem => elem.id === id);
+    //         const old = data[index];
+    //         const newItem = {...old, important: !old.important}
+
+    //         const before = data.slice(0, index);
+    //         const after = data.slice(index + 1);
+    //         const newArr = [...before, newItem, ...after];
+
+    //         return{
+    //             data: newArr
+    //         }
+    //     })
+    // }
+
+    // onToggleLiked(id) {
+    //     this.setState(({data}) => {
+    //         const index = data.findIndex(elem => elem.id === id);
+    //         const old = data[index];
+    //         const newItem = {...old, like: !old.like}
+
+    //         const before = data.slice(0, index);
+    //         const after = data.slice(index + 1);
+    //         const newArr = [...before, newItem, ...after];
+
+    //         return{
+    //             data: newArr
+    //         }
+    //     })
+    // }
 
     searchPost(items, term) {
         if (term.length === 0) {
